@@ -4,6 +4,7 @@ import { ProtectedRoute } from "./ProtectedRoutes";
 import Login from "../Pages/Login";
 import Home from "../Pages/Home";
 import NavBar from "../comman/NavBar";
+import Logout from "../Pages/Logout";
 
 const AllRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const AllRoutes = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/logout" element={<Logout />} />
         <Route path="login" element={<Login />} />
       </Route>
     </Routes>

@@ -7,6 +7,7 @@ const AxiosRequest = axios.create({
 
 AxiosRequest.interceptors.request.use(
   (config) => {
+    console.log(config, "config====");
     const { cancelToken } = config;
     if (cancelToken) {
       // cancel previous request and delete from queue

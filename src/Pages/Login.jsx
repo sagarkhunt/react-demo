@@ -9,7 +9,7 @@ import { login } from "../store/auth/auth.fetch";
 
 const validationSchema = Yup.object().shape({
   password: Yup.string().min(2, "Too Short!").required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
+  username: Yup.string().required("Required"),
 });
 
 function Login() {
@@ -18,7 +18,7 @@ function Login() {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
     validationSchema,
@@ -35,15 +35,17 @@ function Login() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
-            type="email"
+            type="text"
             placeholder="Enter email"
-            name="email"
-            value={formik.values.email}
+            name="username"
+            value={formik.values.username}
             onChange={formik.handleChange}
           />
 
-          {formik.errors.email && formik.touched.email ? (
-            <Form.Text className="text-danger">{formik.errors.email}</Form.Text>
+          {formik.errors.email && formik.touched.username ? (
+            <Form.Text className="text-danger">
+              {formik.errors.username}
+            </Form.Text>
           ) : null}
         </Form.Group>
 
