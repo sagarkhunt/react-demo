@@ -4,10 +4,8 @@ const _cancelToken = {};
 const AxiosRequest = axios.create({
   baseURL: `${process.env.REACT_APP_API_END_POINT}`,
 });
-
 AxiosRequest.interceptors.request.use(
   (config) => {
-    console.log(config, "config====");
     const { cancelToken } = config;
     if (cancelToken) {
       // cancel previous request and delete from queue
@@ -16,13 +14,11 @@ AxiosRequest.interceptors.request.use(
         delete _cancelToken[cancelToken];
         source.cancel();
       }
-
       // add current request in queue
       const source = CancelToken.source();
       config.cancelToken = source.token;
       _cancelToken[cancelToken] = source;
     }
-
     // change some global axios configurations
     // add accessToken header before sending api
     const accessToken = localStorage.getItem("authToken");

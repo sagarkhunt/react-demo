@@ -5,8 +5,8 @@ import { Col, Form, Row } from "react-bootstrap";
 
 const Products = () => {
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.products);
-  console.log("🚀 ~ file: Products.jsx:8 ~ Products ~ products:", products);
+  const { products } = useSelector((state) => state?.products);
+
   // const [temp, setTemp] = useState("");
   const [sort, setSort] = useState("");
 
@@ -123,95 +123,179 @@ const Products = () => {
           </div>
         </div>
       </section>
-      <div className="listing-section">
-        <div className="product">
-          <div className="image-box">
-            <div className="images" id="image-1"></div>
-          </div>
-          <div className="text-box">
-            <h2 className="item">Orange</h2>
-            <h3 className="price">$4.99</h3>
-            <p className="description">A bag of delicious oranges!</p>
-            <label htmlFor="item-1-quantity">Quantity:</label>
-            <input type="text" name="item-1-quantity" id="item-1-quantity" />
-            <button type="button" name="item-1-button" id="item-1-button">
+      <div style={{ display: "flex" }}>
+        <div
+          className="App"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-evenly",
+            width: "80%",
+          }}>
+          {products?.records.map((prod) => (
+            <div
+              key={prod.id}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                padding: 10,
+                border: "1px solid grey",
+                width: "30%",
+                marginTop: 10,
+                gap: 10,
+              }}>
+              <img
+                src={prod.thumbnail}
+                alt={prod.title}
+                style={{ height: 200, objectFit: "cover" }}
+              />
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span>{prod.title}</span>
+                <b>$ {prod.price}</b>
+              </div>
+              <button
+                style={{
+                  padding: 5,
+                  border: 0,
+                  borderRadius: 5,
+                  backgroundColor: "#e53935",
+                  color: "white",
+                }}
+                // onClick={() =>
+                //   dispatch({
+                //     type: "REMOVE_FROM_CART",
+                //     payload: prod,
+                //   })
+                // }
+              >
+                Remove from Cart
+              </button>
+              <button
+                style={{
+                  padding: 5,
+                  border: 0,
+                  borderRadius: 5,
+                  backgroundColor: "green",
+                  color: "white",
+                }}
+                // onClick={() =>
+                //   dispatch({
+                //     type: "ADD_TO_CART",
+                //     payload: {
+                //       id: prod.id,
+                //       title: prod.title,
+                //       thumbnail: prod.thumbnail,
+                //       qty: prod.qty,
+                //       price: prod.price,
+                //     },
+                //   })
+                // }
+              >
+                Add to Cart
+              </button>
+              {/* {cart.some((p) => p.id === prod.id) ? (
+            <button
+              style={{
+                padding: 5,
+                border: 0,
+                borderRadius: 5,
+                backgroundColor: "#e53935",
+                color: "white",
+              }}
+              onClick={() =>
+                dispatch({
+                  type: "REMOVE_FROM_CART",
+                  payload: prod,
+                })
+              }>
+              Remove from Cart
+            </button>
+          ) : (
+            <button
+              style={{
+                padding: 5,
+                border: 0,
+                borderRadius: 5,
+                backgroundColor: "green",
+                color: "white",
+              }}
+              onClick={() =>
+                dispatch({
+                  type: "ADD_TO_CART",
+                  payload: {
+                    id: prod.id,
+                    title: prod.title,
+                    thumbnail: prod.thumbnail,
+                    qty: prod.qty,
+                    price: prod.price,
+                  },
+                })
+              }>
               Add to Cart
             </button>
-          </div>
+          )} */}
+            </div>
+          ))}
         </div>
-        <div className="product">
-          <div className="image-box">
-            <div className="images" id="image-2"></div>
-          </div>
-          <div className="text-box">
-            <h2 className="item">Apple</h2>
-            <h3 className="price">$4.99</h3>
-            <p className="description">A bag of delicious apples!</p>
-            <label htmlFor="item-2-quantity">Quantity:</label>
-            <input type="text" name="item-2-quantity" id="item-2-quantity" />
-            <button type="button" name="item-2-button" id="item-2-button">
-              Add to Cart
-            </button>
-          </div>
-        </div>
-        <div className="product">
-          <div className="image-box">
-            <div className="images" id="image-3"></div>
-          </div>
-          <div className="text-box">
-            <h2 className="item">Passionfruit</h2>
-            <h3 className="price">$4.99</h3>
-            <p className="description">A bag of delicious passionfruit!</p>
-            <label htmlFor="item-3-quantity">Quantity:</label>
-            <input type="text" name="item-3-quantity" id="item-3-quantity" />
-            <button type="button" name="item-3-button" id="item-3-button">
-              Add to Cart
-            </button>
-          </div>
-        </div>
-        <div className="product">
-          <div className="image-box">
-            <div className="images" id="image-4"></div>
-          </div>
-          <div className="text-box">
-            <h2 className="item">Pineapple</h2>
-            <h3 className="price">$4.99</h3>
-            <p className="description">A bag of delicious pineapples!</p>
-            <label htmlFor="item-4-quantity">Quantity:</label>
-            <input type="text" name="item-4-quantity" id="item-4-quantity" />
-            <button type="button" name="item-4-button" id="item-4-button">
-              Add to Cart
-            </button>
-          </div>
-        </div>
-        <div className="product">
-          <div className="image-box">
-            <div className="images" id="image-5"></div>
-          </div>
-          <div className="text-box">
-            <h2 className="item">Mango</h2>
-            <h3 className="price">$4.99</h3>
-            <p className="description">A bag of delicious mangos!</p>
-            <label htmlFor="item-5-quantity">Quantity:</label>
-            <input type="text" name="item-5-quantity" id="item-5-quantity" />
-            <button type="button" name="item-5-button" id="item-5-button">
-              Add to Cart
-            </button>
-          </div>
-        </div>
-        <div className="product">
-          <div className="image-box">
-            <div className="images" id="image-6"></div>
-          </div>
-          <div className="text-box">
-            <h2 className="item">Coconut</h2>
-            <h3 className="price">$4.99</h3>
-            <p className="description">A bag of delicious coconuts!</p>
-            <label htmlFor="item-6-quantity">Quantity:</label>
-            <input type="text" name="item-6-quantity" id="item-6-quantity" />
-            <button type="button" name="item-6-button" id="item-6-button">
-              Add to Cart
-            </button>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            margin: 10,
+            backgroundColor: "#ececec",
+            padding: 10,
+            width: "20%",
+          }}>
+          <b style={{ fontSize: 30, alignSelf: "center" }}>Cart</b>
+          <b style={{ alignSelf: "center" }}>Subtotal: $ 10</b>
+          <div
+            style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+            {/* {cart.length > 0 ? ( */}
+            {/* cart.map((prod) => ( */}
+            <div
+              // key={prod.title}
+              style={{
+                display: "flex",
+                padding: 10,
+                border: "1px solid grey",
+                margin: 5,
+                justifyContent: "space-between",
+              }}>
+              <div style={{ display: "flex", gap: 10 }}>
+                <img
+                  src="https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+                  alt="iPhone"
+                  style={{ width: 70, objectFit: "cover" }}
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-evenly",
+                  }}>
+                  <span>iPhone 9</span>
+                  <b>$ 549</b>
+                </div>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <button
+                // onClick={() => changeQty(prod.id, prod.qty - 1)}
+                >
+                  -
+                </button>
+                <span>10</span>
+                <button
+                // onClick={() => changeQty(prod.id, prod.qty + 1)}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            {/* )) ) : ( */}
+            <span style={{ padding: 20, alignSelf: "center" }}>
+              Cart is empty
+            </span>
+            {/* )} */}
           </div>
         </div>
       </div>
